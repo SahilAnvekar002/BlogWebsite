@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Bloggers - Home{% endblock %}
+{% block css %} <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}"> {% endblock %}
+{% block body %}
+<header class="home">
+    <div class="bg" style="background-image: url('../static/media/home-bg.jpg');"></div>
+    <div class="heading">
+        <h1>Bloggers</h1>
+        <span>Read blogs on different topics for free and join us to create your own blogs</span>
+    </div>
+</header>
+
+<section class="articles">
+    <h1 class="articles-heading">Popular Blogs</h1>
+    <div class="container">
+        {% for blog in blogs %}
+        {% if loop.index0 < 4 %}
+        {% set img = imgs[loop.index0] %}
+        <div class="article">
+            <div class="left">
+                <strong>{{ blog.title }}</strong>
+                <h3>{{ blog.main_heading if blog.main_heading|length <= 35 else blog.main_heading[:35]+'...' }}</h3>
+                <div>{{ blog.date }}</div>
+                <p>{{ blog.main_content[:100]|safe }}...</p>
+                <a href="blogs/{{blog.slug}}">Continue reading <i class="fa-solid fa-greater-than" style="font-size: 0.8rem;margin-left: 3px;color: rgb(85, 26, 139);"></i></a>
+            </div>
+            <div class="right">
+                <img src="data:image/jpg;base64,{{img}}" alt="Thumbnail">
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,4 @@
+{
+    "sql_uri":"mysql://root:@localhost/codesmackers",
+    "secret_key":"ETjgjgjGJYGK484HYFG"
+}

@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% block title %}Bloggers - {{blog.main_heading}}{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/article.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+{% block body %}
+
+<header class="article">
+    <div class="bg" style="background-image: url('data:image/jpg;base64,{{bg_img}}');"></div>
+    <div class="heading">
+        <h1>{{blog.main_heading if blog.main_heading|length <= 35 else blog.main_heading[:35]+'...'}}</h1>
+        <span>{{blog.main_content[:80]|safe}}...</span>
+    </div>
+</header>
+
+<section class="article-section">
+    <div class="main-content">
+        {% for para in main_content_paras %}
+        <p>{{para}}</p>
+        {% endfor %}
+    </div>
+
+    <div class="container">
+        <h1 class="sub-heading" style="margin-bottom: 30px;">{{blog.sub_heading}}</h1>
+        <img src="data:image/jpg;base64,{{img}}" alt="">
+        {% for para in sub_content_paras %}
+        <p>{{para}}</p>
+        {% endfor %}
+
+        {% if user %}
+        <div class="comment">
+            <h2>Leave a Comment</h2>
+            <form action="/blogs/{{blog.slug}}" method="post">
+                <textarea name="comment" id="comment" cols="30" rows="7" placeholder="Message"></textarea>
+                <button type="submit">Post Comment</button>
+            </form>
+        </div>
+        {% endif %}
+
+        <div class="show-comments">
+            <h2 class="comments-heading">{{comments|length}} Comments on {{blog.main_heading}}</h2>
+            {% for comment in comments %}
+            {% set is_replies = [] %}
+            {% if comment.root_id is none %}
+
+            {% for e in comments %}
+                {% if e.root_id == comment.id %}
+                    {% set temp = is_replies.append(1) %}
+                {% endif %}
+            {% endfor %}
+            <div class="user-comment">
+                <div class="user">
+                    <a href="" class="name">{{comment.username}}</a>
+                    <a href="" class="date"> {{comment.date}} </a>
+                    {% if user %}<button class="reply" onclick="toggleReplyBox('comment{{comment.id}}');">Reply</button>{% endif %}
+                    {% if comment.user_id == user_id %} <span style="cursor: pointer;" onclick="toggleOptions('options-{{comment.id}}')"><i class="fa-solid fa-ellipsis-vertical" style="margin-left: 10px;"></i></span> {% endif %}
+                    <div style="position: absolute; margin-left: 210px;">
+                        <a href="/delete-comment/{{comment.id}}/{{blog.slug}}" id="options-{{comment.id}}" style="background-color: #212529; color: white; font-size: 1rem; padding: 0.55rem 0.75rem;border-radius: 0.375rem; display: none; text-decoration: none;">Delete</a>
+                    </div>
+                </div>
+                <div class="message">
+                    <p style="margin-bottom: 10px;">{{comment.comment_text}}</p>
+                </div>
+                {% if is_replies[0] == 1 %}
+                <div style="margin-bottom: 15px;margin-left: 10px;text-decoration: underline;cursor: pointer;" onclick="toggleViewReplies('view-replies-{{comment.id}}')">View replies</div>
+                {% endif %}
+                <div class="reply-form" id="comment{{comment.id}}">
+                    <div style="display: flex;align-items: center;">
+                        <h2>Reply to {{comment.username}}</h2>
+                        <button onclick="toggleCommentBox('comment{{comment.id}}');">Cancel Reply</button>
+                    </div>
+                    <form action="/blogs/{{blog.slug}}" method="post">
+                        <textarea name="comment" id="comment" cols="30" rows="7" placeholder="Message"></textarea>
+                        <input type="hidden" name="root_username" value="{{comment.username}}">
+                        <input type="hidden" name="parent_username" value="{{comment.username}}">
+                        <input type="hidden" name="root_id" value="{{comment.id}}">
+                        <button type="submit">Post Comment</button>
+                    </form>
+                </div>
+                <div class="border"></div>
+            </div>
+            {% endif %}
+            
+            <div style="display: none;" id="view-replies-{{comment.id}}">
+            {% for sub_comment in comments %}
+            {% if sub_comment.root_id is not none and sub_comment.root_id == comment.id %}
+            <div class="user-reply" style="margin-left: 50px;" >
+                <div class="user">
+                    <a href="" class="name">{{sub_comment.username}}</a>
+                    <a href="" class="date">{{sub_comment.date}} </a>
+                    {% if user %}<button class="reply" onclick="toggleReplyBox('comment{{sub_comment.id}}');">Reply</button>{% endif %}
+                    {% if sub_comment.user_id == user_id %} <span style="cursor: pointer;" onclick="toggleOptions('options-{{sub_comment.id}}')"><i class="fa-solid fa-ellipsis-vertical" style="margin-left: 10px;"></i></span> {% endif %}
+                    <div style="position: absolute; margin-left: 210px;">
+                        <a href="/delete-comment/{{sub_comment.id}}/{{blog.slug}}" id="options-{{sub_comment.id}}" style="background-color: #212529; color: white; padding: 0.55rem 0.75rem; font-size: 1rem; border-radius: 0.375rem; display: none; text-decoration: none;">Delete</a>
+                    </div>
+                </div>
+                <div class="message">
+                    <p><a href="" style="text-decoration: none;color: #323232;font-size: 0.9rem;">@{{sub_comment.parent_username}}</a>&ThinSpace;{{sub_comment.comment_text}}</p>
+                </div>
+                <div class="reply-form" id="comment{{sub_comment.id}}">
+                    <div style="display: flex;align-items: center;">
+                        <h2>Reply to {{sub_comment.username}}</h2>
+                        <button onclick="toggleCommentBox('comment{{sub_comment.id}}');">Cancel Reply</button>
+                    </div>
+                    <form action="/blogs/{{blog.slug}}" method="post">
+                        <textarea name="comment" id="comment" cols="30" rows="7" placeholder="Message"></textarea>
+                        <input type="hidden" name="root_username" value="{{comment.username}}">
+                        <input type="hidden" name="root_id" value="{{comment.id}}">
+                        <input type="hidden" name="parent_username" value="{{sub_comment.username}}">
+                        <button type="submit">Post Comment</button>
+                    </form>
+                </div>
+                <div class="border"></div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<script>
+    let comment = document.getElementsByClassName('comment')[0];
+    function toggleReplyBox(commentId) {
+        let reply = document.getElementById(commentId);
+        comment.style.display = 'none';
+        reply.style.display = 'flex';
+        reply.style.flexDirection = 'column';
+    }
+
+    function toggleCommentBox(commentId) {
+        let reply = document.getElementById(commentId);
+        comment.style.display = 'flex';
+        reply.style.display = 'none';
+    }
+
+    function toggleViewReplies (commentId){
+        let reply = document.getElementById(commentId);
+        if(reply.style.display == 'none'){
+            reply.style.display = 'block'
+        }
+        else{
+            reply.style.display = 'none'
+        }
+    }
+
+    function toggleOptions(commentId){
+        let options = document.getElementById(commentId);
+        if(options.style.display == 'none'){
+            options.style.display = 'block'
+        }
+        else{
+            options.style.display = 'none'
+        }
+    }
+
+</script>
+{% endblock %}

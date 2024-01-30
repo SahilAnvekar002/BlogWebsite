@@ -1,0 +1,345 @@
+/* Header */
+header.article{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+header.article .bg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 85%;
+    width: 100%;
+    background-color: #6c757d;
+    background: no-repeat center center;
+    background-size: cover;
+    background-attachment: scroll;
+}
+header.article .bg::before{
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #212529;
+    opacity: 0.5;
+}
+
+.article .heading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    margin-bottom: 10vh;
+    width: 700px;
+}
+
+.article .heading h1{
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.article .heading span{
+    color: #fff;
+    font-weight: 400;
+    font-size: 1.7rem;
+}
+
+.article-section{
+    background-color: rgba(248, 249, 250, 1);
+    padding: 60px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.article-section .main-content{
+    width: 750px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin-bottom: 50px;
+}
+
+.article-section .main-content p{
+    font-family:'Times New Roman', Times, serif;
+    font-size: 1.4rem;
+    color: #212529;
+    line-height: 1.5;
+    font-weight: 400;
+    margin: 1rem 0;
+}
+
+.article-section .container{
+    width: 750px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.article-section .container h1{
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.article-section .container p{
+    font-family:'Times New Roman', Times, serif;
+    font-size: 1.4rem;
+    color: #212529;
+    line-height: 1.5;
+    font-weight: 400;
+    margin: 1rem 0;
+}
+
+.comment{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin-bottom: 50px;
+}
+
+.comment h2{
+    margin-bottom: 30px;
+}
+
+.comment form{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.comment form textarea{
+    /*background-color: rgba(248, 249, 250, 1);*/
+    padding: 1rem 1rem;
+    font-size: 1.2rem;
+    color: #212529;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    margin-bottom: 10px;
+    width: 500px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.comment form textarea:focus::placeholder{
+    position: absolute;
+    top:0;
+    font-size: 1rem;
+    color: #ced4da;
+}
+
+.comment form button{
+    background-color: #0085A1;
+    color: #fff;
+    font-weight: bolder;
+    padding: 0.5rem 1rem;
+    border: none;
+    outline: none;
+    opacity: 0.65;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.show-comments{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.show-comments .comments-heading{
+    font-size: 1.4rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #d6d6d6;
+    margin-bottom: 10px;
+}
+
+.show-comments .user-comment, .show-comments .user-reply{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    padding: 1rem 0;
+    /*border-bottom: 1px solid #d6d6d6;*/
+}
+
+.border{
+    width: 50vw;
+    border-bottom: 1px solid #d6d6d6;
+}
+
+
+.show-comments .user-comment .user, .show-comments .user-reply .user{
+    display: flex;
+    align-items: center;
+}
+
+.show-comments .user-comment .user a, .show-comments .user-reply .user a{
+    color: #323232;
+    margin-right: 20px;
+}
+
+.show-comments .user-comment .user button{
+    color: #323232;
+    margin-right: 20px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid grey;
+    cursor: pointer;
+    background-color: white;
+}
+
+.show-comments .user-comment .user .name, .show-comments .user-reply .user .name{
+    text-decoration: none;
+}
+
+.show-comments .user-comment .user .date, .show-comments .user-reply .user .date{
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+.show-comments .user-comment .message, .show-comments .user-reply .message{
+    display: flex;
+}
+
+.show-comments .user-comment .message p, .show-comments .user-reply .message p{
+    font-size: 1.1rem;
+    font-family:'Times New Roman', Times, serif;
+}
+
+/**/
+.reply-form{
+    margin-top: 20px;
+    display: none;
+}
+
+.user-comment h2, .user-reply h2{
+    font-size: 1.3rem;
+    margin-right: 10px;
+}
+
+.user-comment button, .user-reply button{
+    color: #323232;
+    margin-right: 20px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid grey;
+    cursor: pointer;
+    background-color: white;
+}
+
+.user-comment form, .user-reply form{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.user-comment form textarea, .user-reply form textarea{
+    /*background-color: rgba(248, 249, 250, 1);*/
+    padding: 1rem 1rem;
+    font-size: 1.2rem;
+    color: #212529;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    margin-bottom: 10px;
+    width: 40vw;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.user-comment form textarea:focus::placeholder, .user-reply form textarea:focus::placeholder{
+    position: absolute;
+    top:0;
+    font-size: 1rem;
+    color: #ced4da;
+}
+
+.user-comment form button, .user-reply form button{
+    background-color: #0085A1;
+    color: #fff;
+    font-weight: bolder;
+    padding: 0.5rem 1rem;
+    border: none;
+    outline: none;
+    opacity: 0.65;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 1200px){
+    header.article{
+        height: 60vh;
+    }
+    header.article .bg{
+        height: 70%;
+    }
+}
+
+@media only screen and (max-width: 975px){
+    .article .heading h1{
+        font-size: 3rem;
+    }
+    header.article{
+        height: 50vh;
+    }
+    header.article .bg{
+        height: 60%;
+    }
+    .article-section .main-content{
+        width: 85vw;
+    }
+    .article-section .container{
+        width: 85vw;
+    }
+}
+
+@media only screen and (max-width: 800px){
+    .article .heading h1{
+        padding: 0 30px;
+    }
+    .article .heading span{
+        padding: 0 30px;
+    }
+}
+
+@media only screen and (max-width: 650px){
+    .comment form textarea{
+        width: 75vw;
+    }
+    .article-section .container p{
+        font-size: 1.3rem;
+    }
+    .article-section .main-content p{
+        font-size: 1.3rem;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .article .heading h1{
+        font-size: 2rem;
+    }
+    .article .heading span{
+        font-size: 1.3rem;
+    }
+    .article-section .container h1{
+        font-size: 1.5rem;
+    }
+    .article-section .main-content p{
+        font-size: 1.1rem;
+    }
+}

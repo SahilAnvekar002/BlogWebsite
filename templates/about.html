@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Bloggers - About Us{% endblock %}
+{% block css %} <link rel="stylesheet" href="{{url_for('static', filename='css/about.css')}}"> {% endblock %}
+{% block body %}
+<header class="about">
+    <div class="bg" style="background-image: url('../static/media/about-bg.jpg');"></div>
+    <div class="heading">
+        <h1>About Us</h1>
+        <span>This is what we do</span>
+    </div>
+</header>
+
+<section class="about-content">
+    <div class="container">
+        <p>Bloggers is a website which allows users to view coding and IT related blogs. Information technology is evolving very fast with introduction to machine learning and artificial intelligence. Programming languages are adding new modules and frameworks for ease of developers.</p>
+        <p>Our website uploads IT and coding related blogs on regular basis and helps users to understand new trends in IT industry. Blogs uploaded on our website also contains comment section where users can interact with each other and gain additional information</p>
+        <p>The main objective of our website is to help students and beginners in IT industry by providing them regular updates on IT industry and other related topics.</p>
+    </div>
+</section>
+{% endblock %}

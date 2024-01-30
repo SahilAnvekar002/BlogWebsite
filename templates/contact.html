@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block title %}Bloggers - Contact Us{% endblock %}
+{% block css %} <link rel="stylesheet" href="{{url_for('static', filename='css/contact.css')}}"> {% endblock %}
+{% block body %}
+<header class="contact">
+    <div class="bg" style="background-image: url('../static/media/contact-bg.jpg');"></div>
+    <div class="heading">
+        <h1>Contact Us</h1>
+        <span>Have questions? We have answers.</span>
+    </div>
+</header>
+
+<section class="form-section">
+    <p>Want to get in touch? Fill out the form below to send us a message and We will get back to you as soon as possible!</p>
+    <form action="/contact" method="post" class="form">
+        <div class="input-div">
+            <input type="text" id="name" name="name" placeholder="Name" oninput="validateName();">
+            <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;" id="name-symbol"></i>
+        </div>
+        <div id="name-validation" class="error-msg">Name is required</div>
+        <div class="input-div">
+            <input type="email" id="email" name="email" placeholder="Email Address" oninput="validateEmail();">
+            <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;" id="email-symbol"></i>
+        </div>
+        <div id="email-validation" class="error-msg">Invalid Email</div>
+        <div class="input-div">
+            <input type="text" id="phone" name="phone" placeholder="Phone Number" oninput="validatePhone();">
+            <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;" id="phone-symbol"></i>
+        </div>
+        <div id="phone-validation" class="error-msg">Invalid Phone Number</div>
+        <div class="textarea-div">
+            <textarea name="message" id="message" cols="30" rows="7" placeholder="Message" oninput="validateMessage();"></textarea>
+            <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;top:25px;display: flex;" id="message-symbol"></i>
+        </div>
+        <div id="message-validation" class="error-msg">Message is required</div>
+        <button type="submit" id="submit-btn" disabled>Submit</button>
+    </form>
+</section>
+
+<script>
+    let name = document.getElementById('name');
+    let email = document.getElementById('email');
+    let phone = document.getElementById('phone');
+    let message = document.getElementById('message');
+    let name_validation = document.getElementById('name-validation');
+    let email_validation = document.getElementById('email-validation');
+    let phone_validation = document.getElementById('phone-validation');
+    let message_validation = document.getElementById('message-validation');
+
+    function validateName(){
+        let name_symbol = document.getElementById('name-symbol');
+        if(name.value.trim() == ''){
+            name_validation.style.display = 'flex'
+            name.style.borderColor = '#dc3545';
+            name_symbol.style.display = 'flex';
+        }
+        else{
+            name_validation.style.display = 'none'
+            name.style.borderColor = '#ced4da';
+            name_symbol.style.display = 'none';
+        }
+    }
+    function validateEmail(){
+        let email_symbol = document.getElementById('email-symbol');
+        let email_format = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/;
+        if(!email.value.match(email_format)){
+            email_validation.style.display = 'flex'
+            email_symbol.style.display = 'flex'
+            email.style.borderColor = '#dc3545'
+        }
+        else{
+            email_validation.style.display = 'none'
+            email_symbol.style.display = 'none'
+            email.style.borderColor = '#ced4da'
+        }
+    }
+    function validatePhone(){
+        let phone_symbol = document.getElementById('phone-symbol');
+        let phone_format = /^[0-9]{10}/;
+        if(!phone.value.match(phone_format)){
+            phone_validation.style.display = 'flex'
+            phone.style.borderColor = '#dc3545'
+            phone_symbol.style.display = 'flex'
+        }
+        else{
+            phone_validation.style.display = 'none'
+            phone.style.borderColor = '#ced4da'
+            phone_symbol.style.display = 'none'
+        }
+    }
+    function validateMessage(){
+        let message_symbol = document.getElementById('message-symbol');
+        if(message.value.trim() == ''){
+            message_validation.style.display = 'flex'
+            message_symbol.style.display = 'flex'
+            message.style.borderColor = '#dc3545'
+        }
+        else{
+            message_validation.style.display = 'none'
+            message_symbol.style.display = 'none'
+            message.style.borderColor = '#ced4da'
+        }
+    }
+
+    window.onchange = function exampleFunction() {
+        if(name_validation.style.display != 'none' || email_validation.style.display != 'none' || phone_validation.style.display != 'none' || message_validation.style.display != 'none'){
+            let btn = document.getElementById('submit-btn').disabled = true
+        }
+        else{
+            let btn = document.getElementById('submit-btn').disabled = false
+        }
+    }
+    
+</script>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block title %}Bloggers - SignUp{% endblock %}
+{% block css %} <link rel="stylesheet" href="{{url_for('static', filename='css/signup.css')}}"> {% endblock %}
+{% block body %}
+{% if message %}
+    <div class="message" id="alert">
+        {{message}}
+        <i class="fa-solid fa-xmark" style="color: #fff;cursor: pointer;" onclick="closeAlert()"></i>
+    </div>
+{% endif %}
+<section class="form-section">
+    <p>Fill out the form below to create a new user account, join our blog community and get access to latest coding blogs on the internet!</p>
+    <form action="/signup" method="post" class="form">
+        <div class="input-div">
+            <input type="text" id="username" name="username" placeholder="Username" oninput="validateUserName();">
+            <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;" id="username-symbol"></i>
+        </div>
+        <div id="username-validation" class="error-msg">Username is required</div>
+        <div class="input-div">
+            <input type="email" id="email" name="email" placeholder="Email Address" oninput="validateEmail();">
+            <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;" id="email-symbol"></i>
+        </div>
+        <div id="email-validation" class="error-msg">Invalid Email</div>
+        <div class="input-div">
+            <input type="password" id="password" name="password" placeholder="Password" oninput="validatePassword();">
+            <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;" id="password-symbol"></i>
+        </div>
+        <div id="password-validation" class="error-msg">Invalid Password</div>
+        <div class="input-div">
+            <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password" oninput="validateCPassword();">
+            <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;" id="cpassword-symbol"></i>
+        </div>
+        <div id="cpassword-validation" class="error-msg">Passwords does not match</div>
+        <button type="submit" id="submit-btn" disabled>SignUp</button>
+        <span>Already have an account? click <a href="/login">here</a> to login</span>
+    </form>
+</section>
+
+<script>
+    let name = document.getElementById('username');
+    let email = document.getElementById('email');
+    let phone = document.getElementById('password');
+    let message = document.getElementById('cpassword');
+    let name_validation = document.getElementById('username-validation');
+    let email_validation = document.getElementById('email-validation');
+    let phone_validation = document.getElementById('password-validation');
+    let message_validation = document.getElementById('cpassword-validation');
+
+    function validateUserName(){
+        let name_symbol = document.getElementById('username-symbol');
+        if(name.value.trim() == ''){
+            name_validation.style.display = 'flex'
+            name.style.borderColor = '#dc3545';
+            name_symbol.style.display = 'flex';
+        }
+        else{
+            name_validation.style.display = 'none'
+            name.style.borderColor = '#ced4da';
+            name_symbol.style.display = 'none';
+        }
+    }
+    function validateEmail(){
+        let email_symbol = document.getElementById('email-symbol');
+        let email_format = /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9-]+)*$/;
+        if(!email.value.match(email_format)){
+            email_validation.style.display = 'flex'
+            email_symbol.style.display = 'flex'
+            email.style.borderColor = '#dc3545'
+        }
+        else{
+            email_validation.style.display = 'none'
+            email_symbol.style.display = 'none'
+            email.style.borderColor = '#ced4da'
+        }
+    }
+    function validatePassword(){
+        let phone_symbol = document.getElementById('password-symbol');
+        let phone_format = /^[a-z0-9A-Z.!#$%&'*+/=?^_`{|}~-]{8,20}/;
+        if(!phone.value.match(phone_format)){
+            phone_validation.style.display = 'flex'
+            phone.style.borderColor = '#dc3545'
+            phone_symbol.style.display = 'flex'
+        }
+        else{
+            phone_validation.style.display = 'none'
+            phone.style.borderColor = '#ced4da'
+            phone_symbol.style.display = 'none'
+        }
+    }
+    function validateCPassword(){
+        let message_symbol = document.getElementById('cpassword-symbol');
+        if(phone.value != message.value){
+            message_validation.style.display = 'flex'
+            message_symbol.style.display = 'flex'
+            message.style.borderColor = '#dc3545'
+        }
+        else{
+            message_validation.style.display = 'none'
+            message_symbol.style.display = 'none'
+            message.style.borderColor = '#ced4da'
+        }
+    }
+
+    window.onchange = function exampleFunction() {
+        if(name_validation.style.display != 'none' || email_validation.style.display != 'none' || phone_validation.style.display != 'none' || message_validation.style.display != 'none'){
+            let btn = document.getElementById('submit-btn').disabled = true
+        }
+        else{
+            let btn = document.getElementById('submit-btn').disabled = false
+        }
+    }
+
+    function closeAlert(){
+        let alert = document.getElementById('alert');
+        alert.style.display = 'none'; 
+    }
+    
+</script>
+{% endblock %}

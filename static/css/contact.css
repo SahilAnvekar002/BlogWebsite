@@ -1,0 +1,169 @@
+/* Header */ 
+header.contact{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+header.contact .bg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 80%;
+    width: 100%;
+    background-color: #6c757d;
+    background: no-repeat center center;
+    background-size: cover;
+    background-attachment: scroll;
+}
+header.contact .bg::before{
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #212529;
+    opacity: 0.5;
+}
+
+.contact .heading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    margin-bottom: 10vh;
+}
+
+.contact .heading h1{
+    font-size: 5rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.contact .heading span{
+    color: #fff;
+    font-weight: 300;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+/* Form */
+.form-section{
+    padding: 80px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.form-section p{
+    width: 800px;
+    font-size: 1.4rem;
+    font-family:'Times New Roman', Times, serif;
+    margin-bottom: 50px;
+}
+
+.form-section .form{
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.form-section .form input, .form-section .form textarea{
+    padding: 1.25rem 0;
+    font-size: 1.3rem;
+    color: #212529;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    margin-top: 10px;
+    width: 800px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.form-section .form .input-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-section .form .textarea-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-section .form .error-msg{
+    display: none;
+    margin-top: 5px;
+    color: #dc3545;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+}
+
+.form-section .form input:focus::placeholder, .form-section .form textarea:focus::placeholder{
+    position: absolute;
+    top:0;
+    font-size: 1rem;
+    color: #ced4da;
+}
+
+.form-section .form button{
+    background-color: #0085A1;
+    color: #fff;
+    font-weight: bolder;
+    padding: 1rem 2rem;
+    border: none;
+    outline: none;
+    opacity: 0.65;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 1200px){
+    header.contact{
+        height: 60vh;
+    }
+    
+    header.contact .bg{ 
+        height: 70%;
+    }
+}
+
+@media only screen and (max-width: 1100px){
+    .form-section p{
+        width: 70vw;
+    }
+    
+    .form-section .form{
+        width: 70vw;
+    }
+    
+    .form-section .form input, .form-section .form textarea{
+        width: 70vw;
+    }
+}
+
+@media only screen and (max-width: 975px){
+    header.contact{
+        height: 50vh;
+    }
+    
+    header.contact .bg{ 
+        height: 60%;
+    }
+    .contact .heading h1{
+        font-size: 3rem;
+    }
+}
+
+@media only screen and (max-width: 800px){
+    
+}

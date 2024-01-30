@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Bloggers - Blogs{% endblock %}
+{% block css %} <link rel="stylesheet" href="{{url_for('static', filename='css/blogs.css')}}"> {% endblock %}
+{% block body %}
+<section class="blogs">
+    <div class="container">
+        {% for blog in blogs %}
+        {% set bg_img = bg_imgs[loop.index0] %}
+        {% set username = usernames[loop.index0] %}
+        <div class="article">
+            <div class="left">
+                <strong>{{blog.title}}</strong>
+                <div style="margin: 5px 0;">{{username}}</div>
+                <h3>{{blog.main_heading if blog.main_heading|length <= 50 else blog.main_heading[:50]+'...'}}</h3>
+                <div style="margin: 5px 0;">{{blog.date}}</div>
+                <p>{{blog.main_content[:130]|safe}}...</p>
+                <a href="/blogs/{{blog.slug}}">Continue reading <i class="fa-solid fa-greater-than" style="font-size: 0.8rem;margin-left: 3px;color: rgb(85, 26, 139);"></i></a>
+            </div>
+            <div class="right">
+                <img src="data:image/jpg;base64,{{bg_img}}" alt="Thumbnail">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!--
+<div class="search-bar">
+    <form action="/search" method="post">
+        <input type="text" id="search" name="search" placeholder="Search">
+        <button type="submit">Search</button>
+    </form>
+</div>
+-->
+{% endblock %}

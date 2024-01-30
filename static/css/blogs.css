@@ -1,0 +1,224 @@
+.navbar{
+    background-color: #212529;
+    position: fixed;
+    width: 100vw;
+}
+
+.blogs{
+    padding-top: 160px;
+    padding-bottom: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(248, 249, 250, 1);
+}
+
+.blogs .container{
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.blogs .container .article{
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    /*border: 1px solid #495057;*/
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    width: 1000px;
+    margin: 20px 0;
+}
+
+.blogs .container .article .left{
+    padding: 4rem;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+.blogs .container .article .left strong{
+    color: #6ea8fe;
+    font-weight: bolder;
+}
+
+.blogs .container .article .left h3{
+    font-size: 1.75rem;
+    font-weight: 500;
+}
+
+.blogs .container .article .left div{
+    color: rgb(190 193 196);
+    margin-bottom: 5px;
+}
+
+.blogs .container .article .left p{
+    margin-bottom: 10px;
+}
+
+.blogs .container .article .right{
+    width: 400px;
+}
+
+.blogs .container .article .right img{
+    width: 400px;
+    height: 100%;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.search-bar{
+    position: fixed;
+    top: 25px;
+    left: 30vw;
+    width: 30vw;
+    z-index: 9999;
+}
+
+.search-bar input{
+    padding: 8px 20px;
+    border-radius: 7px;
+    outline: none;
+    margin-right: 10px;
+    width: 60%;
+    background: transparent;
+    border: 1px solid grey;
+    color: white;
+}
+
+.search-bar button{
+    background: #f8f9fa;
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    outline: none;
+    border: 1px solid gray;
+    background-color: transparent;
+    color: white;
+}
+
+.search-bar button:hover{
+    transition: all 0.2s ease-in-out;
+    background-color: transparent;
+    color: white;
+}
+
+@media only screen and (max-width: 1400px){
+    .navbar .left{
+        margin-left: 50px;
+    }
+    .navbar .right{
+        margin-right: 50px;
+    }
+}
+
+@media only screen and (max-width: 1250px){
+    .search-bar{
+        left: 25vw;
+    }
+}
+
+@media only screen and (max-width: 1100px){
+    .blogs .container .article{
+        width: 90vw;
+    }
+    .blogs .container .article .left{
+        width: 60%;
+    }
+    .blogs .container .article .right{
+        width: 40%;
+    }
+    .blogs .container .article .right img{
+        width: 100%;
+        height: 100%;
+    }
+    .search-bar{
+        left: 22vw;
+    }
+}
+
+@media only screen and (max-width: 1000px){
+    .search-bar{
+        left: 35vw;
+        width: 400px;
+    }
+}
+
+@media only screen and (max-width: 900px){
+    .blogs .container .article .left{
+        padding: 3rem;
+    }
+}
+
+@media only screen and (max-width: 800px){
+    .blogs .container .article{
+        width: 65vw;
+        flex-direction: column-reverse;
+    }
+    .blogs .container .article .left{
+        width: 100%;
+        padding: 3rem;
+    }
+    .blogs .container .article .right{
+        width: 100%;
+    }
+    .blogs .container .article .right img{
+        height: 280px;
+        border-top-right-radius: 1rem;
+        border-top-left-radius: 1rem;
+        border-bottom-right-radius: 0;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    .blogs .container .article{
+        width: 70vw;
+    }
+    .search-bar{
+        left: 38vw;
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 550px){
+    .search-bar{
+        position: absolute;
+        left: 20vw;
+        top: 110px;
+        z-index: 9;
+    }
+
+    .search-bar input{
+        border: 1px solid grey;
+    }
+
+    .search-bar button{
+        border: 1px solid grey;
+        color: #212529;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .blogs .container .article .right img{
+        height: 260px;
+    }
+    .blogs .container .article{
+        width: 80vw;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    .blogs .container .article .left{
+        padding: 2rem;
+    }
+    .blogs .container .article{
+        width: 85vw;
+    }
+    .search-bar{
+        width: 250px;
+    }
+}

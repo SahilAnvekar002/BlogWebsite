@@ -1,0 +1,238 @@
+header.home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+header.home .bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 80%;
+    width: 100%;
+    background: no-repeat center center;
+    background-color: #6c757d;
+    background-size: cover;
+    background-attachment: scroll;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header.home .bg::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #212529;
+    opacity: 0.5;
+}
+
+.home .heading{
+    margin-bottom: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 999;
+    width: 75vw;
+}
+
+.home .heading h1{
+    font-size: 5rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.home .heading span{
+    color: #fff;
+    font-weight: 300;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+/* Articles */
+.articles{
+    background-color: rgba(248, 249, 250, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 0;
+}
+
+.articles .articles-heading{
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    font-weight: 800;
+}
+
+.articles .container{
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+    flex-direction: column;
+}
+
+.articles .container .article{
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    /*border: 1px solid #495057;*/
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    width: 45%;
+    width: 900px;
+    margin: 20px 0;
+}
+
+.articles .container .article .left{
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 65%;
+}
+
+.articles .container .article .left strong{
+    color: #6ea8fe;
+    font-weight: bolder;
+}
+
+.articles .container .article .left h3{
+    font-size: 1.75rem;
+    font-weight: 500;
+}
+
+.articles .container .article .left div{
+    color: rgb(190 193 196);
+    margin-bottom: 5px;
+}
+
+.articles .container .article .left p{
+    margin-bottom: 10px;
+}
+
+.articles .container .article .right{
+    width: 35%;
+}
+
+.articles .container .article .right img{
+    height: 100%;
+    width: 100%;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+
+@media only screen and (max-width: 1350px){
+    .articles .container{
+        flex-direction: column;
+    }
+    .articles .container .article{
+        margin: 20px 0;
+    }   
+}
+
+@media only screen and (max-width: 1200px){
+    header.home{
+        height: 60vh;
+    }
+    header.home .bg{
+        height: 70%;
+    }
+}
+
+@media only screen and (max-width: 1000px){
+    .articles .container .article{
+        width: 85vw;
+    }   
+}
+
+@media only screen and (max-width: 975px){
+    .home .heading h1{
+        font-size: 3rem;
+    }
+    .articles .container{
+        width: 90vw;
+        margin-bottom: 1rem;
+    }
+    header.home{
+        height: 50vh;
+    }
+    header.home .bg{
+        height: 60%;
+    }
+    .articles{
+        padding: 60px 0;
+    }
+    .articles .articles-heading{
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    .articles .container .article .left{
+        padding: 2rem;
+    }
+}
+
+@media only screen and (max-width: 850px){
+    .articles .container .article{
+        width: 90vw;
+    }
+    .articles .container .article .left{
+        width: 63%;
+    }
+    .articles .container .article .right{
+        width: 37%;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    .articles{
+        padding: 30px 0;
+    }
+    .articles .container{
+        width: 90vw;
+    }
+    .articles .container .article{
+        width: 80%;
+        flex-direction: column-reverse;
+    }
+    .articles .container .article .left{
+        width: 100%;
+    }
+    .articles .container .article .right{
+        width: 100%;
+    }
+    .articles .container .article .right img{
+        height: 250px;
+        border-top-left-radius: 1rem;
+        border-bottom-right-radius: 0;
+    }
+}
+
+@media only screen and (max-width: 400px){
+    .articles .container .article{
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 350px){
+    .home .heading h1{
+        font-size: 2.3rem;
+    }
+    .navbar .left a{
+        font-size: 1rem;
+    }
+    .navbar .left{
+        margin-left: 20px;
+    }
+    .navbar .right{
+        margin-right: 20px;
+    }
+}

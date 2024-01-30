@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+{% block title %}Bloggers - Create Blog{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/admin.css') }}"> {% endblock %}
+{% block body %}
+<section class="d-flex">
+  <div id="layoutSidenav_nav" style="width: 20vw; height: 100vh; position: fixed; margin-top: 80px;">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+      <div class="sb-sidenav-menu">
+        <div class="nav">
+          <div class="sb-sidenav-menu-heading">Core</div>
+          <a class="nav-link" href="/create-blog">
+            <div class="sb-nav-link-icon">
+              <i class="fas fa-tachometer-alt"></i>
+            </div>
+            Dashboard
+          </a>
+          <div class="sb-sidenav-menu-heading">Interface</div>
+          <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
+            aria-expanded="false" aria-controls="collapseLayouts">
+            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+            Blogs
+            <div class="sb-sidenav-collapse-arrow">
+              <i class="fas fa-angle-down"></i>
+            </div>
+          </a>
+          <div class="collapse myclass" id="collapseLayouts" aria-labelledby="headingOne"
+            data-bs-parent="#sidenavAccordion">
+            <nav class="sb-sidenav-menu-nested nav">
+              {% for blog in blogs %}
+              <a class="nav-link" href="/edit-blog/{{blog.id}}">{{blog.main_heading|truncate(25, True)}}</a>
+              {% endfor %}
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="sb-sidenav-footer">
+        <div class="small">Logged in as:</div>
+        {{user.username}}
+      </div>
+    </nav>
+  </div>
+
+  <div class="container my-5" style="margin-left: 20vw;padding:0 5vw; margin-top: 130px !important;">
+    <h2>Create your own Blog</h2>
+    <div class="my-3" style="width: 60vw">
+      <form action="/create-blog" method="post" enctype="multipart/form-data">
+        <label for="title" class="form-label">Title</label>
+        <div style="display: flex;align-items: center; justify-content: space-between;">
+          <input type="text" class="form-control" id="title" name="title" oninput="validation()" />
+          <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;"
+            id="title-symbol"></i>
+        </div>
+
+        <label for="main_heading" class="form-label">Main Heading</label>
+        <div style="display: flex;align-items: center; justify-content: space-between;">
+          <input type="text" class="form-control" id="main_heading" name="main_heading" oninput="validation()" />
+          <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;"
+            id="main-heading-symbol"></i>
+        </div>
+
+        <label for="main_content" class="form-label">Main Content</label>
+        <div style="display: flex; justify-content: space-between;">
+          <textarea class="form-control" id="main_content" name="main_content" rows="5"
+            oninput="validation()"></textarea>
+          <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;"
+            id="main-content-symbol"></i>
+        </div>
+
+        <label for="sub_heading" class="form-label">Sub heading</label>
+        <div style="display: flex;align-items: center; justify-content: space-between;">
+          <input type="text" class="form-control" id="sub_heading" name="sub_heading" oninput="validation()" />
+          <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;"
+            id="sub-heading-symbol"></i>
+        </div>
+
+        <label for="sub_content" class="form-label">Sub Content</label>
+        <div style="display: flex; justify-content: space-between;">
+          <textarea class="form-control" id="sub_content" name="sub_content" rows="5" oninput="validation()"></textarea>
+          <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;"
+            id="sub-content-symbol"></i>
+        </div>
+
+        <label for="image" class="form-label">Image</label>
+        <div style="display: flex;align-items: center; justify-content: space-between;">
+          <input type="file" class="form-control" id="image" name="image" oninput="validation()" />
+          <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;"
+            id="image-symbol"></i>
+        </div>
+
+        <label for="bg_image" class="form-label">Background Image</label>
+        <div style="display: flex;align-items: center; justify-content: space-between;">
+          <input type="file" class="form-control" id="bg_image" name="bg_image" oninput="validation()" />
+          <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;"
+            id="bg-image-symbol"></i>
+        </div>
+
+        <label for="slug" class="form-label">Slug</label>
+        <div style="display: flex;align-items: center; justify-content: space-between;">
+          <input type="text" class="form-control mb-3" id="slug" name="slug" oninput="validation()" />
+          <i class="fa-solid fa-circle-exclamation" style="color: #dc3545;position: relative;right: 30px;display: flex;"
+            id="slug-symbol"></i>
+        </div>
+
+        <input type="hidden" name="user_id" id="user_id" value="{{user.id}}">
+        <button type="submit" class="btn btn-dark" id="submit-btn" disabled>Add Blog</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<script>
+
+  function validation() {
+    let title = document.getElementById('title')
+    let title_symbol = document.getElementById('title-symbol')
+    let main_heading = document.getElementById('main_heading')
+    let main_heading_symbol = document.getElementById('main-heading-symbol')
+    let main_content = document.getElementById('main_content')
+    let main_content_symbol = document.getElementById('main-content-symbol')
+    let sub_heading = document.getElementById('sub_heading')
+    let sub_heading_symbol = document.getElementById('sub-heading-symbol')
+    let sub_content = document.getElementById('sub_content')
+    let sub_content_symbol = document.getElementById('sub-content-symbol')
+    let image = document.getElementById('image')
+    let image_symbol = document.getElementById('image-symbol')
+    let bg_image = document.getElementById('bg_image')
+    let bg_image_symbol = document.getElementById('bg-image-symbol')
+    let slug = document.getElementById('slug')
+    let slug_symbol = document.getElementById('slug-symbol')
+
+    if (!title.value) {
+      title_symbol.style.display = 'flex'
+    }
+    else {
+      title_symbol.style.display = 'none'
+    }
+
+    if (!main_heading.value) {
+      main_heading_symbol.style.display = 'flex'
+    }
+    else {
+      main_heading_symbol.style.display = 'none'
+    }
+
+    if (!main_content.value) {
+      main_content_symbol.style.display = 'flex'
+    }
+    else {
+      main_content_symbol.style.display = 'none'
+    }
+
+    if (!sub_heading.value) {
+      sub_heading_symbol.style.display = 'flex'
+    }
+    else {
+      sub_heading_symbol.style.display = 'none'
+    }
+
+    if (!sub_content.value) {
+      sub_content_symbol.style.display = 'flex'
+    }
+    else {
+      sub_content_symbol.style.display = 'none'
+    }
+
+    if (!image.value) {
+      image_symbol.style.display = 'flex'
+    }
+    else {
+      image_symbol.style.display = 'none'
+    }
+
+    if (!bg_image.value) {
+      bg_image_symbol.style.display = 'flex'
+    }
+    else {
+      bg_image_symbol.style.display = 'none'
+    }
+
+    if (!slug.value) {
+      slug_symbol.style.display = 'flex'
+    }
+    else {
+      slug_symbol.style.display = 'none'
+    }
+
+    if(title.value && main_heading.value && main_content.value && sub_heading.value && sub_content.value && image.value && bg_image.value && slug.value){
+      let btn = document.getElementById('submit-btn').disabled = false
+    }
+    else{
+      let btn = document.getElementById('submit-btn').disabled = true
+    }
+  }
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+{% endblock %}
